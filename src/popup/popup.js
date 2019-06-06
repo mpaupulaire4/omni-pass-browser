@@ -1,6 +1,14 @@
-let changeColor = document.getElementById('changeColor');
+import popup from './popup.svelte'
+import './popup.css'
 
 chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
+  const app = new popup({
+    target: document.body,
+    props: {
+      name: data.color
+    }
+  });
 });
+
+
+export default app;
