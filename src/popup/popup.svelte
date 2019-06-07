@@ -1,15 +1,16 @@
 <script>
-  export let name;
-  // name = 0;
-  // setInterval(() => {
-  //   name += 1
-  // }, 1000)
+  import Header from '../common/Header.svelte'
+  import Input from '../common/Input.svelte'
 </script>
 
 <style>
-	h1 {
-    width: 500px;
+	div {
+    width: 300px;
 	}
 </style>
-
-<h1 class="bg-blue-100">Hello {name}!</h1>
+<div class="m-px flex flex-col">
+  <Header />
+  <div class="flex-1 p-3">
+    <Input />
+  </div>
+</div>

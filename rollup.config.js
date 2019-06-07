@@ -2,11 +2,12 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import copy from 'rollup-plugin-copy';
+import livereload from 'rollup-plugin-livereload';
 import postcss_plugin from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'postcss';
 import tailwind from 'tailwindcss';
-import purgecss from '@fullhuman/postcss-purgecss'
+import purgecss from '@fullhuman/postcss-purgecss';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -64,6 +65,8 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve(),
 		commonjs(),
+
+		!production && livereload('dist'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
