@@ -3,14 +3,19 @@
   import Input from '../common/Input.svelte'
 </script>
 
-<style>
-	div {
-    width: 300px;
-	}
-</style>
-<div class="m-px flex flex-col">
+<div class="m-px flex flex-col container">
   <Header />
-  <div class="flex-1 p-3">
-    <Input />
+  <div class="content flex-1 p-3">
+    <Input iconLeft="user" />
+    <Input type="password" placeholder="Password" iconLeft="lock" />
   </div>
 </div>
+
+<style>
+	.container {
+    width: 300px;
+	}
+  .content > :global(div) {
+    @apply mb-3;
+  }
+</style>

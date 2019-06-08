@@ -1,14 +1,51 @@
-<div class="flex item-center shadow border rounded leading-tight p-1" >
-  <div class="text-blue-500 w-5 h-full mr-1">
-    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48C141.6 48 48 141.6 48 256s93.6 208 208 208 208-93.6 208-208S370.4 48 256 48zm0 62.4c34.3 0 62.4 28.1 62.4 62.4s-28.1 62.4-62.4 62.4-62.4-28.1-62.4-62.4 28.1-62.4 62.4-62.4zm0 300.4c-52 0-97.8-27-124.8-66.6 1-41.6 83.2-64.5 124.8-64.5s123.8 22.9 124.8 64.5c-27 39.5-72.8 66.6-124.8 66.6z"/></svg>
-  </div>
+<script context="module">
+  export const IconPaths = Object.freeze({
+    user: "M256 48C141.6 48 48 141.6 48 256s93.6 208 208 208 208-93.6 208-208S370.4 48 256 48zm0 62.4c34.3 0 62.4 28.1 62.4 62.4s-28.1 62.4-62.4 62.4-62.4-28.1-62.4-62.4 28.1-62.4 62.4-62.4zm0 300.4c-52 0-97.8-27-124.8-66.6 1-41.6 83.2-64.5 124.8-64.5s123.8 22.9 124.8 64.5c-27 39.5-72.8 66.6-124.8 66.6z",
+    lock: "M376 186h-20v-40c0-55-45-100-100-100S156 91 156 146v40h-20c-22.002 0-40 17.998-40 40v200c0 22.002 17.998 40 40 40h240c22.002 0 40-17.998 40-40V226c0-22.002-17.998-40-40-40zM256 368c-22.002 0-40-17.998-40-40s17.998-40 40-40 40 17.998 40 40-17.998 40-40 40zm62.002-182H193.998v-40c0-34.004 28.003-62.002 62.002-62.002 34.004 0 62.002 27.998 62.002 62.002v40z",
+  })
+</script>
+
+<script>
+  export let type = 'text';
+  export let value = '';
+  export let placeholder = 'Username';
+  export let iconLeft = '';
+  export let iconRight = '';
+  let focused = false;
+  let input;
+</script>
+
+
+<div
+  class="flex item-center shadow border rounded-md leading-tight p-1"
+  on:click="{() => input.focus()}"
+  class:border-blue-500="{focused}"
+>
+  {#if iconLeft && IconPaths[iconLeft]}
+    <svg
+      class="fill-current text-gray-500 w-5 h-full mr-1"
+      class:text-blue-500="{focused}"
+      viewBox="0 0 512 512"
+    >
+      <path d="{IconPaths[iconLeft]}"/>
+    </svg>
+  {/if}
   <input
-    class="appearance-none flex-1 text-gray-700 focus:outline-none font-sans"
     type="text"
-    placeholder="Username"
+    {placeholder}
+    class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"
+    on:focus="{() => focused = true}"
+    on:blur="{() => focused = false}"
+    bind:this="{input}"
+    bind:value
   />
-  <div class="text-blue-500 w-5 h-full ml-1">
-    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 48C141.6 48 48 141.6 48 256s93.6 208 208 208 208-93.6 208-208S370.4 48 256 48zm0 62.4c34.3 0 62.4 28.1 62.4 62.4s-28.1 62.4-62.4 62.4-62.4-28.1-62.4-62.4 28.1-62.4 62.4-62.4zm0 300.4c-52 0-97.8-27-124.8-66.6 1-41.6 83.2-64.5 124.8-64.5s123.8 22.9 124.8 64.5c-27 39.5-72.8 66.6-124.8 66.6z"/></svg>
-  </div>
+  {#if iconRight && IconPaths[iconRight]}
+    <svg
+      class="fill-current text-gray-500 w-5 h-full mr-1"
+      class:text-blue-500="{focused}"
+      viewBox="0 0 512 512"
+    >
+      <path d="{IconPaths[iconRight]}"/>
+    </svg>
+  {/if}
 </div>
-<p class="text-red-500 text-xs italic mt-px">Please choose a password.</p>
