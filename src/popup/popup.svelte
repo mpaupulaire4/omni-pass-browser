@@ -1,13 +1,13 @@
 <script>
-  import Header from '../common/Header.svelte'
-  import Input from '../common/Input.svelte'
+  import Header from '../common/Header.svelte';
+  import Input from '../common/Input.svelte';
 </script>
 
 <div class="m-px flex flex-col container">
   <Header />
   <div class="content flex-1 p-3">
-    <Input iconLeft="user" />
-    <Input type="password" placeholder="Password" iconLeft="lock" />
+    <Input placeholder="Master Username" iconLeft="user" />
+    <Input type="password" placeholder="Master Password" iconLeft="lock" />
   </div>
 </div>
 
