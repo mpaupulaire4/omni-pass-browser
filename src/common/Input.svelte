@@ -1,5 +1,5 @@
 <script>
-  import Ionicon, { IconPaths } from './Ionicon'
+  import Ionicon, { IconPaths } from './Ionicon.svelte'
   export let type = 'text';
   export let value = '';
   export let placeholder;
