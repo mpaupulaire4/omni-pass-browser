@@ -2,6 +2,7 @@
   import Ionicon, { IconPaths } from './Ionicon.svelte'
   export let type = 'text';
   export let value = '';
+  export let name = '';
   export let placeholder;
   export let iconLeft = '';
   export let iconRight = '';
@@ -22,8 +23,9 @@
     />
   {/if}
   <input
-    type="text"
+    {type}
     {placeholder}
+    {name}
     class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"
     on:focus="{() => focused = true}"
     on:blur="{() => focused = false}"
