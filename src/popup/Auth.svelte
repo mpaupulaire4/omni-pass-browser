@@ -1,19 +1,28 @@
 <script>
   import Input from '../common/Input.svelte';
   import Button from '../common/Button.svelte';
+
+  let username = ''
+  let password = ''
+
+  function submitHandler() {
+    console.log(username, password, 123)
+  }
 </script>
 
 <form
-  class="content flex-1 p-3"
-  on:submit|preventDefault="{(e) => console.log(e)}"
+  class="content p-3"
+  on:submit|preventDefault|stopPropagation="{submitHandler}"
   autocomplete="off"
 >
   <Input
+    bind:value="{username}"
     placeholder="Master Username"
     iconLeft="user"
     name="username"
   />
   <Input
+    bind:value="{password}"
     name="password"
     type="password"
     placeholder="Master Password"

@@ -8,6 +8,10 @@
   export let iconRight = '';
   let focused = false;
   let input;
+
+  function changeHandler(e) {
+    value = e.target.value
+  }
 </script>
 
 
@@ -26,11 +30,12 @@
     {type}
     {placeholder}
     {name}
+    {value}
     class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"
     on:focus="{() => focused = true}"
     on:blur="{() => focused = false}"
     bind:this="{input}"
-    bind:value
+    on:change="{changeHandler}"
   />
   {#if iconRight}
     <Ionicon

@@ -5,15 +5,11 @@
   import Generator from './Generator.svelte';
 </script>
 
-<div class="m-px flex flex-col container">
+<div class="m-px container">
   <Header />
-  <div
-    class="content flex-1 p-3"
-    on:submit|preventDefault="{(e) => console.log(e)}"
-    autocomplete="off"
-  >
+  <div>
     <Auth />
-    <Generator />
+    <!-- <Generator /> -->
   </div>
 </div>
 
