@@ -6,6 +6,7 @@
   export let placeholder;
   export let iconLeft = '';
   export let iconRight = '';
+  export let autocomplete;
   let focused = false;
   let input;
 
@@ -29,6 +30,7 @@
   <input
     {type}
     {placeholder}
+    {autocomplete}
     {name}
     {value}
     class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"

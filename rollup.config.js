@@ -5,7 +5,10 @@ import copy from 'rollup-plugin-copy';
 import livereload from 'rollup-plugin-livereload';
 import postcss_plugin from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
+import globals from 'rollup-plugin-node-globals';
+import builtins from 'rollup-plugin-node-builtins';
 import postcss from 'postcss';
+import cssnano from 'cssnano'
 import tailwind from 'tailwindcss';
 import purgecss from '@fullhuman/postcss-purgecss';
 
@@ -43,6 +46,9 @@ export default {
 			extract: true,
       plugins: [
 				tailwind(),
+				cssnano({
+					preset: 'default',
+				}),
 				...(!production ? [] : [
 					purgecss({
 						// Specify the paths to all of the template files in your project
@@ -65,6 +71,8 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve(),
 		commonjs(),
+		globals(),
+		builtins(),
 
 		!production && livereload('dist'),
 
