@@ -13,16 +13,25 @@
   function changeHandler(e) {
     value = e.target.value
   }
+
+  function focus() {
+    if (focused) return
+    focused = true
+    input.focus()
+  }
 </script>
 
 
 <div
-  class="flex item-center shadow border rounded-md leading-tight p-1"
-  on:click="{() => input.focus()}"
+  class="flex item-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none"
+  tabindex="-1"
+  on:focus="{focus}"
+  on:click="{() => !focused && input.focus()}"
   class:border-blue-500="{focused}"
 >
   {#if iconLeft}
     <Ionicon
+      on:click="{() => console.log('clicked')}"
       icon="{iconLeft}"
       class="{`fill-current text-gray-500 w-5 h-full mr-1 ${focused ? 'text-blue-500' : ''}`}"
     />
