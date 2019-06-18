@@ -34,7 +34,7 @@
   {#if iconLeft}
     <Ionicon
       icon="{iconLeft}"
-      class="{`fill-current text-gray-500 w-5 h-full mr-1 ${focused ? 'text-blue-500' : ''}`}"
+      class="{`fill-current w-5 h-full mr-1 ${focused ? 'text-blue-500' : 'text-gray-500'}`}"
     />
   {/if}
   <input
@@ -53,7 +53,7 @@
   {#if iconRight}
     <Ionicon
       icon="{iconRight}"
-      class="{`fill-current text-gray-500 w-5 h-full ml-1 ${focused ? 'text-blue-500' : ''}`}"
+      class="{`fill-current w-5 h-full ml-1 ${focused ? 'text-blue-500' : 'text-gray-500'}`}"
     />
   {/if}
 </div>

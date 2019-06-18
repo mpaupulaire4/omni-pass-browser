@@ -12,9 +12,9 @@
   let pass = ''
 
   async function submitHandler() {
-    pass = ''
+    if ($loading) await masterKey
     $loading = true
-    pass = await generateFromMasterKey(await masterKey, {
+    pass = await generateFromMasterKey(masterKey, {
       context: site,
     })
     $loading = false
@@ -33,7 +33,7 @@
     bind:value={site}
   />
   <div class="flex justify-end">
-    <Button>
+    <Button disabled="{$loading}" >
       Generate
     </Button>
   </div>

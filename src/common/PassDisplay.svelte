@@ -14,8 +14,8 @@
     icon="{visible ? 'eye' : 'eye-off'}"
     class="fill-current text-gray-500 w-5 h-full mr-1 cursor-pointer"
   />
-  <span class="flex-1 overflow-hidden">
-    {visible ? value : value.replace(/./g, '\u2219')}
+  <span class="flex-1 overflow-hidden font-mono text-gray-600">
+    {visible ? value : value.replace(/./g, '*')}
   </span>
   <Ionicon
     on:click="{copyToClipboard}"
