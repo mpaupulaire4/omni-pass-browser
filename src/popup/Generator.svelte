@@ -1,14 +1,23 @@
 <script>
+  import { fade } from 'svelte/transition';
   import Input from '../common/Input.svelte';
+  import { loading } from '../common/Header.svelte';
   import Button from '../common/Button.svelte';
-  import { generateFromMasterKey } from 'omni-pass-core'
+  import PassDisplay from '../common/PassDisplay.svelte';
+  import { generateFromMasterKey } from 'omni-pass-core';
+
   export let masterKey;
+
   let site = ''
   let pass = ''
+
   async function submitHandler() {
-    pass = await generateFromMasterKey(masterKey, {
+    pass = ''
+    $loading = true
+    pass = await generateFromMasterKey(await masterKey, {
       context: site,
     })
+    $loading = false
   }
 </script>
 
@@ -23,18 +32,14 @@
     name="site"
     bind:value={site}
   />
-  <Input
-    readonly="true"
-    name="password"
-    iconLeft="eye"
-    value={pass}
-    iconRight="copy"
-  />
   <div class="flex justify-end">
     <Button>
       Generate
     </Button>
   </div>
+  {#if pass}
+    <PassDisplay value="{pass}" />
+  {/if}
 </form>
 
 

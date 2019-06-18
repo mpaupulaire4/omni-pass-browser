@@ -5,7 +5,7 @@
   };
 </script>
 
-<svg viewBox="0 0 100 100" class="fill-current loader text-blue-500">
+<svg viewBox="0 0 100 100" class="{`fill-current loader ${className}`}">
   <circle cx="12" cy="12" r="12" />
   <circle cx="12" cy="50" r="12" />
   <circle cx="12" cy="88" r="12" />
@@ -22,8 +22,6 @@
   display: inline-grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  min-width: 50px;
-  min-height: 50px;
 }
 .loader circle {
   border-radius: 100%;

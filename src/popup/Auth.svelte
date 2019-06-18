@@ -1,15 +1,16 @@
 <script>
   import Input from '../common/Input.svelte';
   import Button from '../common/Button.svelte';
+  import PassDisplay from '../common/PassDisplay.svelte';
   import { calculateMasterKey } from 'omni-pass-core'
+
   let username = ''
   let password = ''
-  let promise = Promise.resolve()
 
   export let callback = (data) => console.log(data)
 
   function submitHandler() {
-    promise = calculateMasterKey(username, password).then(callback)
+    callback(calculateMasterKey(username, password))
   }
 </script>
 
@@ -35,11 +36,7 @@
   />
   <div class="flex justify-end">
     <Button>
-      {#await promise}
-        ...
-      {:then}
-        Authenticate
-      {/await}
+      Continue
     </Button>
   </div>
 </form>

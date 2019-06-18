@@ -1,12 +1,15 @@
 <script>
-  import Ionicon, { IconPaths } from './Ionicon.svelte'
+  import Ionicon from './Ionicon.svelte'
+
   export let type = 'text';
   export let value = '';
   export let name = '';
-  export let placeholder;
+  export let placeholder = '';
   export let iconLeft = '';
   export let iconRight = '';
-  export let autocomplete;
+  export let autocomplete = '';
+  export let readonly = false;
+
   let focused = false;
   let input;
 
@@ -23,7 +26,7 @@
 
 
 <div
-  class="flex item-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none"
+  class="flex items-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none"
   tabindex="-1"
   on:focus="{focus}"
   on:click="{() => !focused && input.focus()}"
@@ -31,7 +34,6 @@
 >
   {#if iconLeft}
     <Ionicon
-      on:click="{() => console.log('clicked')}"
       icon="{iconLeft}"
       class="{`fill-current text-gray-500 w-5 h-full mr-1 ${focused ? 'text-blue-500' : ''}`}"
     />
@@ -40,6 +42,7 @@
     {type}
     {placeholder}
     {autocomplete}
+    {readonly}
     {name}
     {value}
     class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"

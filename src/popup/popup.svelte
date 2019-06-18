@@ -1,5 +1,5 @@
 <script>
-  import Header from '../common/Header.svelte';
+  import Header, { loading } from '../common/Header.svelte';
   import Input from '../common/Input.svelte';
   import Loading from '../common/Loading.svelte';
   import Auth from './Auth.svelte';
@@ -7,18 +7,22 @@
 
   export let masterKey;
 
-  function setMasterKey(key) {
-    masterKey = key
+  function setMasterKey(promise) {
+    $loading = true
+    $masterKey = promise.then((key) => {
+      $masterKey = key
+      $loading = false
+    })
   }
 </script>
 
 <div class="m-px container">
   <Header />
   <div>
-    {#if !masterKey}
+    {#if !$masterKey}
       <Auth callback="{setMasterKey}"/>
     {:else}
-      <Generator {masterKey} />
+      <Generator masterKey="{$masterKey}" />
     {/if}
   </div>
 </div>
