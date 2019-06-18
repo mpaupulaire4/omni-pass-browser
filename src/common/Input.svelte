@@ -26,11 +26,10 @@
 
 
 <div
-  class="flex items-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none"
+  class="{`flex items-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none ${focused ? 'border-blue-500' : ''}`}"
   tabindex="-1"
   on:focus="{focus}"
   on:click="{() => !focused && input.focus()}"
-  class:border-blue-500="{focused}"
 >
   {#if iconLeft}
     <Ionicon

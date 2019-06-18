@@ -44,7 +44,7 @@
 
 
 <style>
-.content > :global(div) {
+.content > :global(div:not(:last-child)) {
   @apply mb-3;
 }
 </style>

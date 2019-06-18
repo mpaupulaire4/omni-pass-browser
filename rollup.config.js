@@ -14,6 +14,29 @@ import purgecss from '@fullhuman/postcss-purgecss';
 
 const production = !process.env.ROLLUP_WATCH;
 
+const postcss_plugins = [
+	tailwind(),
+]
+
+if (production) {
+	postcss_plugins.push(...[
+		purgecss({
+			// Specify the paths to all of the template files in your project
+			content: [
+				'./src/**/*.html',
+				'./src/**/*.svelte',
+				'./static/**/*.html',
+				// etc.
+			],
+			// Include any special characters you're using in this regular expression
+			defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+		}),
+		cssnano({
+			preset: 'default',
+		})
+	])
+}
+
 export default {
 	input: [
     'src/popup/popup.js',
@@ -44,24 +67,7 @@ export default {
 		}),
 		postcss_plugin({
 			extract: true,
-      plugins: [
-				tailwind(),
-				cssnano({
-					preset: 'default',
-				}),
-				...(!production ? [] : [
-					purgecss({
-						// Specify the paths to all of the template files in your project
-						content: [
-							'./src/**/*.html',
-							'./src/**/*.svelte',
-							// etc.
-						],
-						// Include any special characters you're using in this regular expression
-						defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
-					})
-				])
-			]
+      plugins: postcss_plugins
     }),
 
 		// If you have external dependencies installed from
@@ -76,8 +82,7 @@ export default {
 
 		!production && livereload('dist'),
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
+		// If we're building for production minify
 		production && terser(),
 
 		copy({
