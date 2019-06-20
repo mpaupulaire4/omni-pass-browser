@@ -1,23 +1,21 @@
 <script>
-  import { fade } from 'svelte/transition';
+  import { generateFromMasterKey } from 'omni-pass-core';
   import Input from '../common/Input.svelte';
-  import { loading } from '../common/Header.svelte';
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
-  import { generateFromMasterKey } from 'omni-pass-core';
-
-  export let masterKey;
+  import { master } from './stores';
 
   let site = ''
   let pass = ''
+  let loading = false
 
   async function submitHandler() {
-    if ($loading) await masterKey
-    $loading = true
-    pass = await generateFromMasterKey(masterKey, {
+    if (loading) return
+    loading = true
+    pass = await generateFromMasterKey($master, {
       context: site,
     })
-    $loading = false
+    loading = false
   }
 </script>
 
@@ -33,11 +31,11 @@
     bind:value={site}
   />
   <div class="flex justify-end">
-    <Button disabled="{$loading}" >
+    <Button disabled="{loading}" >
       Generate
     </Button>
   </div>
-  {#if pass}
+  {#if !loading && pass}
     <PassDisplay value="{pass}" />
   {/if}
 </form>

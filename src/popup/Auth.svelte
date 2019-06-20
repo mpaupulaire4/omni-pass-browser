@@ -1,16 +1,22 @@
 <script>
+  import { calculateMasterKey } from 'omni-pass-core'
+  import { loading } from './stores';
   import Input from '../common/Input.svelte';
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
-  import { calculateMasterKey } from 'omni-pass-core'
+  import { master } from './stores'
 
   let username = ''
   let password = ''
 
-  export let callback = (data) => console.log(data)
-
-  function submitHandler() {
-    callback(calculateMasterKey(username, password))
+  async function submitHandler() {
+    if ($loading) return
+    $loading = true
+    try {
+      $master = await calculateMasterKey(username, password)
+    } finally {
+      $loading = false
+    }
   }
 </script>
 
@@ -35,7 +41,7 @@
     iconLeft="lock"
   />
   <div class="flex justify-end">
-    <Button>
+    <Button disabled="{$loading}">
       Continue
     </Button>
   </div>

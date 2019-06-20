@@ -26,7 +26,7 @@
 
 
 <div
-  class="{`flex items-center shadow border rounded-md leading-tight p-1 focus:border-blue-500 focus:outline-none ${focused ? 'border-blue-500' : ''}`}"
+  class="{`flex bg-white items-center shadow border-2 rounded-md leading-tight p-1 ${focused ? 'border-gray-700' : 'border-gray-500'}`}"
   tabindex="-1"
   on:focus="{focus}"
   on:click="{() => !focused && input.focus()}"
@@ -34,7 +34,7 @@
   {#if iconLeft}
     <Ionicon
       icon="{iconLeft}"
-      class="{`fill-current w-5 h-full mr-1 ${focused ? 'text-blue-500' : 'text-gray-500'}`}"
+      class="{`w-5 mr-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
     />
   {/if}
   <input
@@ -53,7 +53,7 @@
   {#if iconRight}
     <Ionicon
       icon="{iconRight}"
-      class="{`fill-current w-5 h-full ml-1 ${focused ? 'text-blue-500' : 'text-gray-500'}`}"
+      class="{`w-5 ml-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
     />
   {/if}
 </div>
