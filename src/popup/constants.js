@@ -17,6 +17,6 @@ export const PasswordStrengths = [
   'Too Guessable',
   'Very Guessable',
   'Somewhat Guessable',
-  'Safely Unguassable',
-  'Very Unguassable',
+  'Safely Unguessable',
+  'Very Unguessable',
 ]

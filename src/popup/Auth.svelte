@@ -60,10 +60,14 @@
     />
     {#if tip}
       <div class="{`flex flex-col flex-1 absolute rounded-b text-gray-100 shadow left-0 right-0 p-1 text-2xs ${WarningBGClasses[score]}`}">
-        <span><strong>Password Strength:</strong> {PasswordStrengths[score]}</span>
-        <span>{warning}</span>
+        <span>
+          <strong>Password Strength:</strong> {PasswordStrengths[score]}
+          {#if warning}
+            - <span>{warning}</span>
+          {/if}
+        </span>
         {#each suggestions as sugg}
-          <span>{sugg}</span>
+          <span> - {sugg}</span>
         {/each}
       </div>
     {/if}
