@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Ionicon from './Ionicon.svelte'
 
   export let type = 'text';
@@ -9,6 +10,8 @@
   export let iconRight = '';
   export let autocomplete = '';
   export let readonly = false;
+
+  const dispatch = createEventDispatcher();
 
   let focused = false;
   let input;
@@ -34,6 +37,9 @@
   {#if iconLeft}
     <Ionicon
       icon="{iconLeft}"
+      on:click="{() => dispatch('lefticonclick')}"
+      on:mouseover="{() => dispatch('lefticonmouseover')}"
+      on:mouseout="{() => dispatch('lefticonmouseout')}"
       class="{`w-5 mr-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
     />
   {/if}
@@ -48,11 +54,14 @@
     on:focus="{() => focused = true}"
     on:blur="{() => focused = false}"
     bind:this="{input}"
-    on:change="{changeHandler}"
+    on:keydown="{changeHandler}"
   />
   {#if iconRight}
     <Ionicon
       icon="{iconRight}"
+      on:click="{() => dispatch('righticonclick')}"
+      on:mouseover="{() => dispatch('righticonmouseover')}"
+      on:mouseout="{() => dispatch('righticonmouseout')}"
       class="{`w-5 ml-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
     />
   {/if}

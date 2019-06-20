@@ -1,13 +1,26 @@
 <script>
   import { calculateMasterKey } from 'omni-pass-core'
+  import zxcvbn from 'zxcvbn'
   import { loading } from './stores';
   import Input from '../common/Input.svelte';
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
   import { master } from './stores'
 
+  const warningClasses = [
+    'text-red-700',
+    'text-orange-700',
+    'text-yellow-700',
+    'text-green-700',
+  ]
+
   let username = ''
   let password = ''
+
+  $: results = zxcvbn(password)
+  $: score = results.score
+  $: warning = results.feedback.warning
+
 
   async function submitHandler() {
     if ($loading) return
@@ -19,7 +32,6 @@
     }
   }
 </script>
-
 <form
   class="content p-3"
   on:submit|preventDefault|stopPropagation="{submitHandler}"
@@ -32,14 +44,22 @@
     iconLeft="user"
     name="username"
   />
-  <Input
-    bind:value="{password}"
-    name="password"
-    type="password"
-    autocomplete="off"
-    placeholder="Master Password"
-    iconLeft="lock"
-  />
+  <div class="relative">
+    <Input
+      bind:value="{password}"
+      name="password"
+      type="password"
+      autocomplete="off"
+      placeholder="Master Password"
+      iconLeft="lock"
+      iconRight="information"
+      on:righticonmouseover="{() => console.log('here')}"
+      on:righticonmouseout="{() => console.log('out')}"
+    />
+    <span class="{`flex-1 text-xs ${warningClasses[score]}`}">
+      {warning}
+    </span>
+  </div>
   <div class="flex justify-end">
     <Button disabled="{$loading}">
       Continue
