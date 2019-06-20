@@ -2,7 +2,7 @@
   "name": "OmniPass Browser Extension",
   "version": "1.0",
   "description": "A browser extension implementation of OmniPass",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "browser_action": {
     "default_title": "OmniPass",
     "default_popup": "popup.html",

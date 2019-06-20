@@ -3,9 +3,9 @@
   import Input from '../common/Input.svelte';
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
-  import { master } from './stores';
+  import { master, hostname } from './stores';
 
-  let site = ''
+  let site = $hostname || ''
   let pass = ''
   let loading = false
 

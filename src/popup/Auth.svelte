@@ -6,17 +6,11 @@
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
   import { master } from './stores'
-
-  const warningClasses = [
-    'text-red-600',
-    'text-orange-600',
-    'text-yellow-600',
-    'text-green-600',
-    'text-blue-600',
-  ]
+  import { PasswordStrengths, WarningClasses, WarningBGClasses } from './constants'
 
   let username = ''
   let password = ''
+  let tip = false
 
   $: results = zxcvbn(password, [
     'master',
@@ -26,6 +20,7 @@
   ])
   $: score = results.score
   $: warning = results.feedback.warning
+  $: suggestions = results.feedback.suggestions
 
 
   async function submitHandler() {
@@ -59,13 +54,19 @@
       placeholder="Master Password"
       iconLeft="lock"
       iconRight="information"
-      iconRightFocus="{warningClasses[score]}"
-      on:righticonmouseover="{() => console.log('here')}"
-      on:righticonmouseout="{() => console.log('out')}"
+      iconRightFocus="{WarningClasses[score]}"
+      on:righticonmouseover="{() => tip = true}"
+      on:righticonmouseout="{() => tip = false}"
     />
-    <span class="{`flex-1 text-xs ${warningClasses[score]}`}">
-      {warning}
-    </span>
+    {#if tip}
+      <div class="{`flex flex-col flex-1 absolute rounded-b text-gray-100 shadow left-0 right-0 p-1 text-2xs ${WarningBGClasses[score]}`}">
+        <span><strong>Password Strength:</strong> {PasswordStrengths[score]}</span>
+        <span>{warning}</span>
+        {#each suggestions as sugg}
+          <span>{sugg}</span>
+        {/each}
+      </div>
+    {/if}
   </div>
   <div class="flex justify-end">
     <Button disabled="{$loading}">
@@ -78,5 +79,8 @@
 <style>
 .content > :global(div:not(:last-child)) {
   @apply mb-3;
+}
+.text-2xs {
+  font-size: .6rem;
 }
 </style>

@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, readable } from 'svelte/store'
 
 class MasterStore {
   constructor() {
@@ -19,15 +19,17 @@ class MasterStore {
   async init () {
     return new Promise((resolve) => {
       chrome.storage.local.get(['key', 'remember'], ({key, remember}) => {
+        this._remember
         if (!remember) return
         resolve(set(Buffer.from(key)))
       })
     })
   }
 
-  remember(bool) {
-    this.remember = !!bool
-    if (this.remember) {
+  remember(bool = this._remember) {
+    if (!!bool === this._remember) return bool
+    this._remember = !!bool
+    if (this._remember) {
       this.set = async (data) => {
         this._set(data)
         await this.save(data)
@@ -36,6 +38,8 @@ class MasterStore {
       this.save(null)
       this.set = this._set
     }
+    chrome.storage.local.set({remember: this._remember})
+    return this._remember
   }
 
   async save(data) {
@@ -65,6 +69,17 @@ class LoadingStore {
   }
 }
 
-export const loading = new LoadingStore()
-export const master = new MasterStore()
+const hostname = readable(null, (set) => {
+  if (!chrome.tabs) return set(location.hostname)
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    set(tabs[0].url);
+  });
+})
+const loading = new LoadingStore()
+const master = new MasterStore()
 
+export {
+  hostname,
+  loading,
+  master
+}
