@@ -8,16 +8,22 @@
   import { master } from './stores'
 
   const warningClasses = [
-    'text-red-700',
-    'text-orange-700',
-    'text-yellow-700',
-    'text-green-700',
+    'text-red-600',
+    'text-orange-600',
+    'text-yellow-600',
+    'text-green-600',
+    'text-blue-600',
   ]
 
   let username = ''
   let password = ''
 
-  $: results = zxcvbn(password)
+  $: results = zxcvbn(password, [
+    'master',
+    'omni',
+    'pass',
+    'omni-pass',
+  ])
   $: score = results.score
   $: warning = results.feedback.warning
 
@@ -53,6 +59,7 @@
       placeholder="Master Password"
       iconLeft="lock"
       iconRight="information"
+      iconRightFocus="{warningClasses[score]}"
       on:righticonmouseover="{() => console.log('here')}"
       on:righticonmouseout="{() => console.log('out')}"
     />

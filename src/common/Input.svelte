@@ -8,6 +8,8 @@
   export let placeholder = '';
   export let iconLeft = '';
   export let iconRight = '';
+  export let iconRightFocus = 'text-gray-800';
+  export let iconLeftFocus = 'text-gray-800';
   export let autocomplete = '';
   export let readonly = false;
 
@@ -29,7 +31,7 @@
 
 
 <div
-  class="{`flex bg-white items-center shadow border-2 rounded-md leading-tight p-1 ${focused ? 'border-gray-700' : 'border-gray-500'}`}"
+  class="{`flex bg-white items-center shadow border-2 rounded-md leading-tight p-1 ${focused ? 'border-gray-800' : 'border-gray-500'}`}"
   tabindex="-1"
   on:focus="{focus}"
   on:click="{() => !focused && input.focus()}"
@@ -40,7 +42,7 @@
       on:click="{() => dispatch('lefticonclick')}"
       on:mouseover="{() => dispatch('lefticonmouseover')}"
       on:mouseout="{() => dispatch('lefticonmouseout')}"
-      class="{`w-5 mr-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
+      class="{`w-5 mr-1 ${focused ? iconLeftFocus : 'text-gray-500'}`}"
     />
   {/if}
   <input
@@ -62,7 +64,7 @@
       on:click="{() => dispatch('righticonclick')}"
       on:mouseover="{() => dispatch('righticonmouseover')}"
       on:mouseout="{() => dispatch('righticonmouseout')}"
-      class="{`w-5 ml-1 ${focused ? 'text-gray-700' : 'text-gray-500'}`}"
+      class="{`w-5 ml-1 ${focused ? iconRightFocus : 'text-gray-500'}`}"
     />
   {/if}
 </div>
