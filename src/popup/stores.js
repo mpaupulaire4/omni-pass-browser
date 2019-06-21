@@ -20,7 +20,7 @@ class MasterStore {
     return new Promise((resolve) => {
       chrome.storage.local.get(['key', 'remember'], ({key, remember}) => {
         this._remember
-        if (!remember) return
+        if (!remember) return resolve(null)
         resolve(set(Buffer.from(key)))
       })
     })

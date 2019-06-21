@@ -15,7 +15,7 @@
 
 <div class="m-px relative bg-gray-200 container">
   <Header />
-  {#if $master}
+  {#if !$master}
     <Auth />
   {:else}
     <Generator />
