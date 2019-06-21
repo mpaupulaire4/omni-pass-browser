@@ -1,19 +1,29 @@
 <script>
   import { generateFromMasterKey } from 'omni-pass-core';
+  import { fade, slide } from 'svelte/transition'
   import Input from '../common/Input.svelte';
+  import Counter from '../common/Counter.svelte';
   import Button from '../common/Button.svelte';
   import PassDisplay from '../common/PassDisplay.svelte';
   import { master, hostname } from './stores';
 
   let site = $hostname || ''
+  let name = 'password'
+  let counter = 1
+  let length = 16
   let pass = ''
   let loading = false
+  let options = false
+  let required = ''
 
   async function submitHandler() {
     if (loading) return
     loading = true
     pass = await generateFromMasterKey($master, {
       context: site,
+      counter,
+      length,
+      required
     })
     loading = false
   }
@@ -27,17 +37,29 @@
   <Input
     placeholder="Site"
     iconLeft="globe"
-    name="site"
     bind:value={site}
   />
-  <div class="flex justify-end">
+  <div class="flex justify-end items-center">
+    <span class="text-gray-800 text-xs">
+      <Counter bind:counter min="{1}" label="counter"/>
+      <Counter bind:counter="{length}" min="{Math.max(required.length, 1)}" label="length"/>
+    </span>
+    <span class="flex-1">
+    </span>
     <Button disabled="{loading}" >
       Generate
     </Button>
   </div>
-  {#if !loading && pass}
-    <PassDisplay value="{pass}" />
-  {/if}
+  <!-- {#if options}
+    <div transition:slide="{{}}">
+      <Input
+        placeholder="What's being generated?"
+        iconLeft="globe"
+        bind:value={name}
+      />
+    </div>
+  {/if} -->
+  <PassDisplay value="{pass}" />
 </form>
 
 

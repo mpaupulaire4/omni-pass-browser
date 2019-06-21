@@ -12,6 +12,7 @@
   export let iconLeftFocus = 'text-gray-800';
   export let autocomplete = '';
   export let readonly = false;
+  export let autofocus = false;
 
   const dispatch = createEventDispatcher();
 
@@ -52,6 +53,7 @@
     {readonly}
     {name}
     {value}
+    {autofocus}
     class="appearance-none flex-1 text-gray-600 focus:outline-none font-sans leading-tight"
     on:focus="{() => focused = true}"
     on:blur="{() => focused = false}"
