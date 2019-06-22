@@ -17,5 +17,13 @@
     "32": "images/key32.png",
     "128": "images/key128.png"
   },
+  "_execute_browser_action": {
+    "suggested_key": {
+      "windows": "Ctrl+Shift+O",
+      "mac": "MacCtrl+Shift+O",
+      "chromeos": "Ctrl+Shift+O",
+      "linux": "Ctrl+Shift+O"
+    }
+  },
   "manifest_version": 2
 }
