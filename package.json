@@ -1,6 +1,6 @@
 {
   "name": "omni-pass-browser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "author": "Michel Paupulaire <mpaupulaire4@gmail.com>",
   "license": "MIT",
