@@ -1,14 +1,15 @@
 <script>
   import { fly } from 'svelte/transition'
+  import { master } from '../popup/stores'
   import Ionicon from './Ionicon.svelte'
 
   let open = false
-  export let remember = false
+  export let remember = master.remember()
   export let save = false
   export let cloud = false
 
   function toggleRemeber() {
-    remember = !remember
+    remember = master.remember(!remember)
   }
   function toggleOpen() {
     open = !open
@@ -55,8 +56,3 @@
     <Ionicon icon="more" class="w-5 -mr-2 cursor-pointer" on:click="{toggleOpen}"/>
   </div>
 </span>
-
-<style>
-.menu {
-}
-</style>

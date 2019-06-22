@@ -14,7 +14,7 @@
 </script>
 
 <div class="m-px relative bg-gray-200 container">
-  <Header />
+  <Header remember="{master.remember()}"/>
   {#if !$master}
     <Auth />
   {:else}
