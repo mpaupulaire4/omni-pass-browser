@@ -2,9 +2,9 @@
   import { calculateMasterKey } from 'omni-pass-core'
   import zxcvbn from 'zxcvbn'
   import { loading } from './stores';
-  import Input from '../common/Input.svelte';
-  import Button from '../common/Button.svelte';
-  import PassDisplay from '../common/PassDisplay.svelte';
+  import Input from 'omni-pass-ui/src/Input.svelte';
+  import Button from 'omni-pass-ui/src/Button.svelte';
+  import PassDisplay from 'omni-pass-ui/src/PassDisplay.svelte';
   import { master } from './stores'
   import { PasswordStrengths, WarningClasses, WarningBGClasses } from './constants'
 

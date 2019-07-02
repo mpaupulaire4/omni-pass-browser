@@ -86,9 +86,9 @@ export default {
 		production && terser(),
 
 		copy({
-			targets: {
-				static: 'dist'
-			},
+			targets: [
+				{ src: 'static', dest: 'dist'}
+			],
 		})
 	],
 	watch: {

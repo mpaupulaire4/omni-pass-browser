@@ -1,8 +1,8 @@
 <script>
   import { slide, fade } from 'svelte/transition'
   import Header from '../common/Header.svelte';
-  import Input from '../common/Input.svelte';
-  import Loading from '../common/Loading.svelte';
+  import { Input } from 'omni-pass-ui';
+  import { Loading } from 'omni-pass-ui';
   import { master, loading } from './stores';
   import Auth from './Auth.svelte';
   import Generator from './Generator.svelte';

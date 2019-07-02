@@ -1,10 +1,10 @@
 <script>
   import { generateFromMasterKey } from 'omni-pass-core';
   import { fade, slide } from 'svelte/transition'
-  import Input from '../common/Input.svelte';
-  import Counter from '../common/Counter.svelte';
-  import Button from '../common/Button.svelte';
-  import PassDisplay from '../common/PassDisplay.svelte';
+  import { Input } from 'omni-pass-ui';
+  import { Counter } from 'omni-pass-ui';
+  import { Button } from 'omni-pass-ui';
+  import { PassDisplay } from 'omni-pass-ui';
   import { master, hostname } from './stores';
 
   let site = $hostname || ''

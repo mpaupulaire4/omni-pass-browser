@@ -1,7 +1,7 @@
 <script>
   import { fly } from 'svelte/transition'
   import { master } from '../popup/stores'
-  import Ionicon from './Ionicon.svelte'
+  import { Ionicon } from 'omni-pass-ui'
 
   let open = false
   export let remember = master.remember()
