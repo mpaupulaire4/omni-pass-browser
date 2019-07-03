@@ -41,16 +41,12 @@
   <Input
     bind:value="{username}"
     placeholder="Master Username"
-    autocomplete="off"
     iconLeft="user"
-    name="username"
   />
   <div class="relative">
     <Input
       bind:value="{password}"
-      name="password"
       type="password"
-      autocomplete="off"
       placeholder="Master Password"
       iconLeft="lock"
       iconRight="information"

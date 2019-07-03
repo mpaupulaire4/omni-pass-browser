@@ -87,8 +87,9 @@ export default {
 
 		copy({
 			targets: [
-				{ src: 'static', dest: 'dist'}
+				{ src: 'static/*', dest: 'dist'}
 			],
+			copyOnce: true
 		})
 	],
 	watch: {
