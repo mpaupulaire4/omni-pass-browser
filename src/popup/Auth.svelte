@@ -4,7 +4,6 @@
   import { loading } from './stores';
   import Input from 'omni-pass-ui/src/Input.svelte';
   import Button from 'omni-pass-ui/src/Button.svelte';
-  import PassDisplay from 'omni-pass-ui/src/PassDisplay.svelte';
   import { master } from './stores'
   import { PasswordStrengths, WarningClasses, WarningBGClasses } from './constants'
 
@@ -49,38 +48,33 @@
       type="password"
       placeholder="Master Password"
       iconLeft="lock"
-      iconRight="information"
-      iconRightFocus="{WarningClasses[score]}"
-      on:righticonmouseover="{() => tip = true}"
-      on:righticonmouseout="{() => tip = false}"
-    />
-    {#if tip}
-      <div class="{`flex flex-col flex-1 absolute rounded-b text-gray-100 shadow left-0 right-0 p-1 text-2xs ${WarningBGClasses[score]}`}">
-        <span>
-          <strong>Password Strength:</strong> {PasswordStrengths[score]}
-          {#if warning}
-            - <span>{warning}</span>
-          {/if}
-        </span>
+      iconRight="right-chevrom"
+    >
+      <span
+        slot="help"
+        on:mouseover="{() => tip = true}"
+        on:mouseout="{() => tip = false}"
+        class="{WarningClasses[score]}"
+      >
+        {#if password}
+          Strength: {PasswordStrengths[score]}
+        {/if}
+      </span>
+    </Input>
+    {#if tip && suggestions.length}
+      <div class="{`flex flex-col flex-1 absolute rounded text-gray-100 shadow left-0 right-0 px-1 py-2 text-2xs ${WarningBGClasses[score]} bottom-0`}">
         {#each suggestions as sugg}
           <span> - {sugg}</span>
         {/each}
       </div>
     {/if}
   </div>
-  <div class="flex justify-end">
-    <Button disabled="{$loading}">
-      Continue
-    </Button>
-  </div>
+  <input type="submit" class="hidden"/>
 </form>
 
 
 <style>
 .content > :global(div:not(:last-child)) {
   @apply mb-3;
-}
-.text-2xs {
-  font-size: .6rem;
 }
 </style>

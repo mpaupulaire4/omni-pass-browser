@@ -1,9 +1,9 @@
 export const WarningClasses = [
-  'text-red-600-70',
-  'text-orange-600-70',
-  'text-yellow-600-70',
-  'text-green-600-70',
-  'text-blue-600-70',
+  'text-red-400-90',
+  'text-orange-400-90',
+  'text-yellow-400-90',
+  'text-green-400-90',
+  'text-blue-400-90',
 ]
 export const WarningBGClasses = [
   'bg-red-600-70',
